@@ -1,0 +1,194 @@
+/********************************************************************************************************************
+
+
+
+
+
+
+mysql> create database swiggy;
+Query OK, 1 row affected (0.14 sec)
+
+mysql> use swiggy;
+Database changed
+mysql> CREATE TABLE Customers ( CustomerID INT PRIMARY KEY, CustomerName VARCHAR(50), City VARCHAR(30), Membership VARCHAR(20) );
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> INSERT INTO Customers  VALUES (101,'Amit Sharma','Delhi','Gold'), (102,'Priya Verma','Mumbai','Silver'), (103,'Rahul Singh','Delhi','Gold'), (104,'Sneha Gupta','Pune','Regular'), (105,'Karan Mehta','Bangalore','Silver'), (106,'Anjali Jain','Delhi','Gold'), (107,'Rohit Kumar','Hyderabad','Regular'), (108,'Neha Kapoor','Mumbai','Gold'), (109,'Pooja Arora','Pune','Silver'), (110,'Vikas Malhotra','Chennai','Regular'), (111,'Riya Sharma','Jaipur','Gold'), (112,'Aditya Singh','Lucknow','Regular');
+Query OK, 12 rows affected (0.05 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Restaurants ( RestaurantID INT PRIMARY KEY, RestaurantName VARCHAR(50), Cuisine VARCHAR(30), City VARCHAR(30), Rating DECIMAL(2,1) );
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> INSERT INTO Restaurants VALUES (201,'Burger King','Fast Food','Delhi',4.4), (202,'Dominos','Pizza','Mumbai',4.5), (203,'Biryani Blues','Biryani','Delhi',4.7), (204,'Pizza Hut','Pizza','Pune',4.3), (205,'Subway','Healthy','Bangalore',4.2), (206,'KFC','Fast Food','Hyderabad',4.1), (207,'Haldiram''s','North Indian','Delhi',4.6), (208,'Wow Momo','Chinese','Mumbai',4.2), (209,'Barbeque Nation','BBQ','Pune',4.8), (210,'Faasos','Rolls','Chennai',4.0), (211,'McDonalds','Fast Food','Delhi',4.3), (212,'Behrouz Biryani','Biryani','Bangalore',4.7);
+Query OK, 12 rows affected (0.12 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Orders ( OrderID INT PRIMARY KEY, CustomerID INT, RestaurantID INT, OrderAmount INT, DeliveryPartner VARCHAR(30), OrderDate DATE, OrderStatus VARCHAR(20), FOREIGN KEY(CustomerID) REFERENCES Customers(CustomerID), FOREIGN KEY(RestaurantID) REFERENCES Restaurants(RestaurantID) );
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> INSERT INTO Orders VALUES (1001,101,201,450,'Rahul','2026-08-01','Delivered'), (1002,102,202,780,'Aman','2026-08-01','Delivered'), (1003,103,203,620,'Rohit','2026-08-02','Delivered'), (1004,104,204,540,'Rahul','2026-08-02','Cancelled'), (1005,105,205,390,'Aman','2026-08-03','Delivered'), (1006,106,207,860,'Neha','2026-08-03','Delivered'), (1007,107,206,710,'Rohit','2026-08-04','Delivered'), (1008,108,208,580,'Rahul','2026-08-04','Delivered'), (1009,109,209,950,'Aman','2026-08-05','Delivered'), (1010,110,210,430,'Neha','2026-08-05','Delivered'), (1011,101,203,720,'Rahul','2026-08-06','Delivered'), (1012,102,202,810,'Aman','2026-08-06','Delivered'), (1013,103,207,650,'Neha','2026-08-07','Delivered'), (1014,104,204,490,'Rohit','2026-08-07','Delivered'), (1015,105,212,880,'Rahul','2026-08-08','Delivered'), (1016,106,211,520,'Aman','2026-08-08','Cancelled'), (1017,107,206,640,'Neha','2026-08-09','Delivered'), (1018,108,208,760,'Rahul','2026-08-09','Delivered'), (1019,109,209,990,'Rohit','2026-08-10','Delivered'), (1020,110,210,450,'Aman','2026-08-10','Delivered');
+Query OK, 20 rows affected (0.24 sec)
+Records: 20  Duplicates: 0  Warnings: 0
+
+mysql> select * from customers;
++------------+----------------+-----------+------------+
+| CustomerID | CustomerName   | City      | Membership |
++------------+----------------+-----------+------------+
+|        101 | Amit Sharma    | Delhi     | Gold       |
+|        102 | Priya Verma    | Mumbai    | Silver     |
+|        103 | Rahul Singh    | Delhi     | Gold       |
+|        104 | Sneha Gupta    | Pune      | Regular    |
+|        105 | Karan Mehta    | Bangalore | Silver     |
+|        106 | Anjali Jain    | Delhi     | Gold       |
+|        107 | Rohit Kumar    | Hyderabad | Regular    |
+|        108 | Neha Kapoor    | Mumbai    | Gold       |
+|        109 | Pooja Arora    | Pune      | Silver     |
+|        110 | Vikas Malhotra | Chennai   | Regular    |
+|        111 | Riya Sharma    | Jaipur    | Gold       |
+|        112 | Aditya Singh   | Lucknow   | Regular    |
++------------+----------------+-----------+------------+
+12 rows in set (0.06 sec)
+
+mysql> select 8 from restaurants;
++---+
+| 8 |
++---+
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
++---+
+12 rows in set (0.02 sec)
+
+mysql> select * from restaurants;
++--------------+-----------------+--------------+-----------+--------+
+| RestaurantID | RestaurantName  | Cuisine      | City      | Rating |
++--------------+-----------------+--------------+-----------+--------+
+|          201 | Burger King     | Fast Food    | Delhi     |    4.4 |
+|          202 | Dominos         | Pizza        | Mumbai    |    4.5 |
+|          203 | Biryani Blues   | Biryani      | Delhi     |    4.7 |
+|          204 | Pizza Hut       | Pizza        | Pune      |    4.3 |
+|          205 | Subway          | Healthy      | Bangalore |    4.2 |
+|          206 | KFC             | Fast Food    | Hyderabad |    4.1 |
+|          207 | Haldiram's      | North Indian | Delhi     |    4.6 |
+|          208 | Wow Momo        | Chinese      | Mumbai    |    4.2 |
+|          209 | Barbeque Nation | BBQ          | Pune      |    4.8 |
+|          210 | Faasos          | Rolls        | Chennai   |    4.0 |
+|          211 | McDonalds       | Fast Food    | Delhi     |    4.3 |
+|          212 | Behrouz Biryani | Biryani      | Bangalore |    4.7 |
++--------------+-----------------+--------------+-----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select * from orders;
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+| OrderID | CustomerID | RestaurantID | OrderAmount | DeliveryPartner | OrderDate  | OrderStatus |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+|    1001 |        101 |          201 |         450 | Rahul           | 2026-08-01 | Delivered   |
+|    1002 |        102 |          202 |         780 | Aman            | 2026-08-01 | Delivered   |
+|    1003 |        103 |          203 |         620 | Rohit           | 2026-08-02 | Delivered   |
+|    1004 |        104 |          204 |         540 | Rahul           | 2026-08-02 | Cancelled   |
+|    1005 |        105 |          205 |         390 | Aman            | 2026-08-03 | Delivered   |
+|    1006 |        106 |          207 |         860 | Neha            | 2026-08-03 | Delivered   |
+|    1007 |        107 |          206 |         710 | Rohit           | 2026-08-04 | Delivered   |
+|    1008 |        108 |          208 |         580 | Rahul           | 2026-08-04 | Delivered   |
+|    1009 |        109 |          209 |         950 | Aman            | 2026-08-05 | Delivered   |
+|    1010 |        110 |          210 |         430 | Neha            | 2026-08-05 | Delivered   |
+|    1011 |        101 |          203 |         720 | Rahul           | 2026-08-06 | Delivered   |
+|    1012 |        102 |          202 |         810 | Aman            | 2026-08-06 | Delivered   |
+|    1013 |        103 |          207 |         650 | Neha            | 2026-08-07 | Delivered   |
+|    1014 |        104 |          204 |         490 | Rohit           | 2026-08-07 | Delivered   |
+|    1015 |        105 |          212 |         880 | Rahul           | 2026-08-08 | Delivered   |
+|    1016 |        106 |          211 |         520 | Aman            | 2026-08-08 | Cancelled   |
+|    1017 |        107 |          206 |         640 | Neha            | 2026-08-09 | Delivered   |
+|    1018 |        108 |          208 |         760 | Rahul           | 2026-08-09 | Delivered   |
+|    1019 |        109 |          209 |         990 | Rohit           | 2026-08-10 | Delivered   |
+|    1020 |        110 |          210 |         450 | Aman            | 2026-08-10 | Delivered   |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> select count(*) as total_orders from orders;
++--------------+
+| total_orders |
++--------------+
+|           20 |
++--------------+
+1 row in set (0.26 sec)
+
+mysql> select sum(orderamount) as total_revenus from orders;
++---------------+
+| total_revenus |
++---------------+
+|         13220 |
++---------------+
+1 row in set (0.10 sec)
+
+mysql> select avg(orderamount) as average_revenue from orders;
++-----------------+
+| average_revenue |
++-----------------+
+|        661.0000 |
++-----------------+
+1 row in set (0.05 sec)
+
+mysql> select * from orders order by orderamount desc limit 5;
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+| OrderID | CustomerID | RestaurantID | OrderAmount | DeliveryPartner | OrderDate  | OrderStatus |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+|    1019 |        109 |          209 |         990 | Rohit           | 2026-08-10 | Delivered   |
+|    1009 |        109 |          209 |         950 | Aman            | 2026-08-05 | Delivered   |
+|    1015 |        105 |          212 |         880 | Rahul           | 2026-08-08 | Delivered   |
+|    1006 |        106 |          207 |         860 | Neha            | 2026-08-03 | Delivered   |
+|    1012 |        102 |          202 |         810 | Aman            | 2026-08-06 | Delivered   |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+5 rows in set (0.01 sec)
+
+mysql> select c.city sum(o.orderamount)as revenue from customers c join orders o on c.customerid group by c.city order by revenue desc limit 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sum(o.orderamount)as revenue from customers c join orders o on c.customerid grou' at line 1
+mysql>
+mysql>
+mysql> select c.city ,sum(o.orderamount)as revenue from customers c join orders o on c.customerid=o.customerid
+    -> group by c.city
+    -> order by revenue desc
+    -> limit 1;
++-------+---------+
+| city  | revenue |
++-------+---------+
+| Delhi |    3820 |
++-------+---------+
+1 row in set (0.03 sec)
+
+mysql> select deliverypartner , count(*) as deliveries from orders where orderstatus='Delivered' group by deliverpartner order by deliveries desc limit 1;
+ERROR 1054 (42S22): Unknown column 'deliverpartner' in 'group statement'
+mysql> select deliverypartner , count(*) as deliveries from orders where orderstatus='Delivered' group by deliverypartner order by deliveries desc limit 1;
++-----------------+------------+
+| deliverypartner | deliveries |
++-----------------+------------+
+| Rahul           |          5 |
++-----------------+------------+
+1 row in set (0.01 sec)
+
+mysql> select * from orders where orderamount> ( select avg(orderamount) from orders);
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+| OrderID | CustomerID | RestaurantID | OrderAmount | DeliveryPartner | OrderDate  | OrderStatus |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+|    1002 |        102 |          202 |         780 | Aman            | 2026-08-01 | Delivered   |
+|    1006 |        106 |          207 |         860 | Neha            | 2026-08-03 | Delivered   |
+|    1007 |        107 |          206 |         710 | Rohit           | 2026-08-04 | Delivered   |
+|    1009 |        109 |          209 |         950 | Aman            | 2026-08-05 | Delivered   |
+|    1011 |        101 |          203 |         720 | Rahul           | 2026-08-06 | Delivered   |
+|    1012 |        102 |          202 |         810 | Aman            | 2026-08-06 | Delivered   |
+|    1015 |        105 |          212 |         880 | Rahul           | 2026-08-08 | Delivered   |
+|    1018 |        108 |          208 |         760 | Rahul           | 2026-08-09 | Delivered   |
+|    1019 |        109 |          209 |         990 | Rohit           | 2026-08-10 | Delivered   |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+9 rows in set (0.02 sec)
+
