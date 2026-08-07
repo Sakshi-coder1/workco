@@ -1,9 +1,21 @@
-/********************************************************************************************************************
+/************************************************************************************************************************
+                    SWIGGY BUSINESS ANALYTICS CASE STUDY USING MYSQL
+
+Author      : Sakshi Waware
+Project     : Swiggy Business Analytics Case Study Using SQL
+Database    : Swiggy Business Analytics Case Study Using SQL
+Tools Used  : MySQL 8.0
+
+Description:
+This project analyzes a scenario: You have recently joined Swiggy as a Junior Data Analyst. 
+Your manager has shared the customer, restaurant, and order databases. 
+Your task is to analyze the data and answer the following business questions using SQL.
+**************************************************************************************************************************/
 
 
-
-
-
+/*************************************************************************************************************************
+                                DATABASE CREATION
+******************************************************************************************************************/
 
 mysql> create database swiggy;
 Query OK, 1 row affected (0.14 sec)
@@ -192,3 +204,37 @@ mysql> select * from orders where orderamount> ( select avg(orderamount) from or
 +---------+------------+--------------+-------------+-----------------+------------+-------------+
 9 rows in set (0.02 sec)
 
+
+
+
+
+
+/******************************************************************************************************************************/
+
+Q20. Final Business Report
+Management questions answered in one word, based on the queries above.
+Management Question
+One-Word Answer
+
+1.   Which city should Swiggy focus on for expansion?
+Ans. Delhi
+2.   Which restaurant is the best-performing partner?
+Ans. Biryani Blues
+3.   Which cuisine should be promoted more?
+Ans. Fast Food
+4.   Who are the top 5 most valuable customers?
+Ans. Rahul Singh
+5.   Which delivery partner deserves a performance bonus?
+Ans. Ravi Kumar
+6.   What is the average customer spending per order?
+Ans. ₹589.60
+7.   Which restaurants need improvement based on ratings?
+Ans. Faasos
+8.   What percentage of orders were cancelled?
+Ans. 8%
+9.   Which city has the highest average order value?
+Ans. Pune
+10.  Suggest three recommendations to improve Swiggy's business.
+Ans. Retain, Improve, Reward
+
+****************************************************************************************************************/
