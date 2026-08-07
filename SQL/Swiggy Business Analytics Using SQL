@@ -1,0 +1,909 @@
+DAY 1)
+
+
+mysql> create database bootcamp;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> use bootcamp;
+Database changed
+mysql> create table employees(
+    -> employee_id int primary key,
+    -> name varchar(50),
+    -> department varchar(30),
+    -> city varchar(30),
+    -> salary int,
+    -> experience int);
+Query OK, 0 rows affected (0.52 sec)
+
+mysql> insert into employees values
+    -> (101, 'rahul','IT','Delhi',45000,3),
+    -> (102, 'priya','Finance','Mumbai',60000,4),
+    -> (103, 'Ram','IT','Banglore',10000,4),
+    -> (104, 'Priya','HR','Delhi',20000,1),
+    -> (105, 'Anika','Finance','Banglore',30000,2);
+Query OK, 5 rows affected (0.14 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++-------------+-------+------------+----------+--------+------------+
+| employee_id | name  | department | city     | salary | experience |
++-------------+-------+------------+----------+--------+------------+
+|         101 | rahul | IT         | Delhi    |  45000 |          3 |
+|         102 | priya | Finance    | Mumbai   |  60000 |          4 |
+|         103 | Ram   | IT         | Banglore |  10000 |          4 |
+|         104 | Priya | HR         | Delhi    |  20000 |          1 |
+|         105 | Anika | Finance    | Banglore |  30000 |          2 |
++-------------+-------+------------+----------+--------+------------+
+5 rows in set (0.01 sec)
+
+mysql> --Display selected columns
+    -> select name,city from employees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--Display selected columns
+select name,city from employees' at line 1
+mysql> --Display selected columns
+    ->
+    ->
+    -> select name , city from employees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--Display selected columns
+
+
+select name , city from employees' at line 1
+mysql>
+mysql> select name , city from employees;
++-------+----------+
+| name  | city     |
++-------+----------+
+| rahul | Delhi    |
+| priya | Mumbai   |
+| Ram   | Banglore |
+| Priya | Delhi    |
+| Anika | Banglore |
++-------+----------+
+5 rows in set (0.03 sec)
+
+mysql> select distinct city from employees;
++----------+
+| city     |
++----------+
+| Delhi    |
+| Mumbai   |
+| Banglore |
++----------+
+3 rows in set (0.03 sec)
+
+mysql> select name from employees where salary > 30000;
++-------+
+| name  |
++-------+
+| rahul |
+| priya |
++-------+
+2 rows in set (0.07 sec)
+
+mysql> select name from employees where department='IT';
++-------+
+| name  |
++-------+
+| rahul |
+| Ram   |
++-------+
+2 rows in set (0.00 sec)
+
+mysql>  select * from employees where department='IT';
++-------------+-------+------------+----------+--------+------------+
+| employee_id | name  | department | city     | salary | experience |
++-------------+-------+------------+----------+--------+------------+
+|         101 | rahul | IT         | Delhi    |  45000 |          3 |
+|         103 | Ram   | IT         | Banglore |  10000 |          4 |
++-------------+-------+------------+----------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> Select name from employees where salary>30000 and department='IT';
++-------+
+| name  |
++-------+
+| rahul |
++-------+
+1 row in set (0.00 sec)
+
+mysql>  select * from employees where salary>30000 or department='IT';
++-------------+-------+------------+----------+--------+------------+
+| employee_id | name  | department | city     | salary | experience |
++-------------+-------+------------+----------+--------+------------+
+|         101 | rahul | IT         | Delhi    |  45000 |          3 |
+|         102 | priya | Finance    | Mumbai   |  60000 |          4 |
+|         103 | Ram   | IT         | Banglore |  10000 |          4 |
++-------------+-------+------------+----------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql>  select * name from employees order by salary desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name from employees order by salary desc' at line 1
+mysql> select * from employees order by salary desc;
++-------------+-------+------------+----------+--------+------------+
+| employee_id | name  | department | city     | salary | experience |
++-------------+-------+------------+----------+--------+------------+
+|         102 | priya | Finance    | Mumbai   |  60000 |          4 |
+|         101 | rahul | IT         | Delhi    |  45000 |          3 |
+|         105 | Anika | Finance    | Banglore |  30000 |          2 |
+|         104 | Priya | HR         | Delhi    |  20000 |          1 |
+|         103 | Ram   | IT         | Banglore |  10000 |          4 |
++-------------+-------+------------+----------+--------+------------+
+5 rows in set (0.17 sec)
+
+mysql> select * name from employees order by salary desc limit 2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name from employees order by salary desc limit 2' at line 1
+mysql> select * from employees order by salary desc limit 2;
++-------------+-------+------------+--------+--------+------------+
+| employee_id | name  | department | city   | salary | experience |
++-------------+-------+------------+--------+--------+------------+
+|         102 | priya | Finance    | Mumbai |  60000 |          4 |
+|         101 | rahul | IT         | Delhi  |  45000 |          3 |
++-------------+-------+------------+--------+--------+------------+
+2 rows in set (0.13 sec)
+
+mysql>
+mysql>
+mysql>
+mysql> SELECT Name, City
+    -> FROM Employee;
+ERROR 1146 (42S02): Table 'bootcamp.employee' doesn't exist
+mysql>
+mysql> SHOW TABLES;
++--------------------+
+| Tables_in_bootcamp |
++--------------------+
+| employees          |
++--------------------+
+1 row in set (0.62 sec)
+
+mysql> SELECT Name, City
+    -> FROM employees;
++-------+----------+
+| Name  | City     |
++-------+----------+
+| rahul | Delhi    |
+| priya | Mumbai   |
+| Ram   | Banglore |
+| Priya | Delhi    |
+| Anika | Banglore |
++-------+----------+
+5 rows in set (0.01 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DAY 2)
+
+mysql> use bootcamp;
+Database changed
+mysql> create table departments(
+    -> departmentID INT PRIMARY KEY,
+    -> DEPARTMENTNAME VARCHAR(38) ,
+    -> LOCATION VARCHAR(30));
+Query OK, 0 rows affected (0.37 sec)
+
+mysql> INSERT INTO DEPARTMENTS VALUES
+    -> (1, 'IT','DELHI'),
+    -> (2, 'HR','PUNE'),
+    -> (3, 'FIANANCE','MUMBAI')
+    -> (4,'IT' ,'DELHI'
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(4,'IT' ,'DELHI'
+)' at line 5
+mysql>
+mysql> INSERT INTO DEPARTMENTS VALUES
+    ->     -> (1, 'IT','DELHI'),
+    ->     -> (2, 'HR','PUNE'),
+    ->     -> (3, 'FIANANCE','MUMBAI')
+    ->     -> (4,'IT' ,'DELHI'
+    ->
+    ->
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> (1, 'IT','DELHI'),
+    -> (2, 'HR','PUNE'),
+    -> (3, 'FIANANCE','MUMBAI')
+ ' at line 2
+mysql>
+mysql>  INSERT INTO DEPARTMENTS VALUES
+    -> (1, 'IT','DELHI'),
+    -> (2, 'HR','PUNE'),
+    ->  (3, 'FIANANCE','DELHI')
+    -> (4,'IT' ,'MUMBAI');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(4,'IT' ,'MUMBAI')' at line 5
+mysql> Insert into departments values
+    -> (1, 'IT','DELHI'),
+    ->     -> (2, 'HR','PUNE'),
+    ->     ->  (3, 'FIANANCE','DELHI')
+    ->     -> (4,'IT' ,'MUMBAI');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> (2, 'HR','PUNE'),
+    ->  (3, 'FIANANCE','DELHI')
+    -> (4,'IT' ,'MUMBAI')' at line 3
+mysql>
+mysql>
+mysql>
+mysql>  Insert into departments values
+    -> (1, 'IT','DELHI'),
+    -> (2, 'HR','PUNE'),
+    -> (3, 'FIANANCE','DELHI'),
+    -> (4,'IT' ,'MUMBAI');
+Query OK, 4 rows affected (0.49 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> create table employees(
+    -> employeeid int primary key,
+    -> employeename varchar(20),
+    -> departmentID int,
+    -> salary int);
+ERROR 1050 (42S01): Table 'employees' already exists
+mysql> select * from employees;
++-------------+-------+------------+----------+--------+------------+
+| employee_id | name  | department | city     | salary | experience |
++-------------+-------+------------+----------+--------+------------+
+|         101 | rahul | IT         | Delhi    |  45000 |          3 |
+|         102 | priya | Finance    | Mumbai   |  60000 |          4 |
+|         103 | Ram   | IT         | Banglore |  10000 |          4 |
+|         104 | Priya | HR         | Delhi    |  20000 |          1 |
+|         105 | Anika | Finance    | Banglore |  30000 |          2 |
++-------------+-------+------------+----------+--------+------------+
+5 rows in set (0.02 sec)
+
+mysql> create table employee(
+    -> employeeid int primary key,
+    -> employeename varchar(20),
+    -> departmentID int,
+    -> salary int);
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> insert into employee values(
+    -> insert into employee values
+    -> (101, 'rahul',1,30000),
+    -> (102, 'priya',5,56000),
+    -> (103,'harsh',2,56388);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'into employee values
+(101, 'rahul',1,30000),
+(102, 'priya',5,56000),
+(103,'harsh' at line 2
+mysql>
+mysql> insert into employee values
+    -> (101, 'rahul',1,30000),
+    -> (102, 'priya',5,56000),
+    -> (103,'harsh',2,56388);
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from departments;
++--------------+----------------+----------+
+| departmentID | DEPARTMENTNAME | LOCATION |
++--------------+----------------+----------+
+|            1 | IT             | DELHI    |
+|            2 | HR             | PUNE     |
+|            3 | FIANANCE       | DELHI    |
+|            4 | IT             | MUMBAI   |
++--------------+----------------+----------+
+4 rows in set (0.02 sec)
+
+mysql> select * from employee;
++------------+--------------+--------------+--------+
+| employeeid | employeename | departmentID | salary |
++------------+--------------+--------------+--------+
+|        101 | rahul        |            1 |  30000 |
+|        102 | priya        |            5 |  56000 |
+|        103 | harsh        |            2 |  56388 |
++------------+--------------+--------------+--------+
+3 rows in set (0.05 sec)
+
+mysql> select * from employee inner join departments on employee.dapartmentid=departmentid;
+ERROR 1054 (42S22): Unknown column 'employee.dapartmentid' in 'on clause'
+mysql> select * from employee inner join departments on employee.departmentid=departments.departmentid;
++------------+--------------+--------------+--------+--------------+----------------+----------+
+| employeeid | employeename | departmentID | salary | departmentID | DEPARTMENTNAME | LOCATION |
++------------+--------------+--------------+--------+--------------+----------------+----------+
+|        101 | rahul        |            1 |  30000 |            1 | IT             | DELHI    |
+|        103 | harsh        |            2 |  56388 |            2 | HR             | PUNE     |
++------------+--------------+--------------+--------+--------------+----------------+----------+
+2 rows in set (0.05 sec)
+
+mysql> select e.employeename , d.departmentname from employee as e inner join departments as d on e.departmentid=d.departmentid;
++--------------+----------------+
+| employeename | departmentname |
++--------------+----------------+
+| rahul        | IT             |
+| harsh        | HR             |
++--------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> select e.employeename, d.location from employee as e left join departments as d on e.departmentid=d.departmentid;
++--------------+----------+
+| employeename | location |
++--------------+----------+
+| rahul        | DELHI    |
+| priya        | NULL     |
+| harsh        | PUNE     |
++--------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select e.employeename, d.location from employee as e right join departments as d on e.departmentid=d.departmentid;
++--------------+----------+
+| employeename | location |
++--------------+----------+
+| rahul        | DELHI    |
+| harsh        | PUNE     |
+| NULL         | DELHI    |
+| NULL         | MUMBAI   |
++--------------+----------+
+4 rows in set (0.01 sec)
+
+mysql> select e.employeename , d.departmentname from employee as e inner join departments as d on e.departmentid=d.departmentid where d.departmentname='IT';
++--------------+----------------+
+| employeename | departmentname |
++--------------+----------------+
+| rahul        | IT             |
++--------------+----------------+
+1 row in set (0.01 sec)
+
+mysql> select e.employeename , d.location from employee as e left join department as d on e.departmentid=d.departmentid UNION select e.employeename, d.location from employee as e right join departs as on e.departmentid=d.departmentid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on e.departmentid=d.departmentid' at line 1
+mysql> select e.employeename , d.location from employee as e left join department as d on e.departmentid=d.departmentid UNION select e.employeename, d.location from employee as e right join departments as d on e.departmentid=d.departmentid;
+ERROR 1146 (42S02): Table 'bootcamp.department' doesn't exist
+mysql> select e.employeename, d.location from employee as e left join departments as d on e.departmentid=d.departmentid UNION select e.employeename, d.location from employee as e right join departments as d on e.departmentid=d.departmentid;
++--------------+----------+
+| employeename | location |
++--------------+----------+
+| rahul        | DELHI    |
+| priya        | NULL     |
+| harsh        | PUNE     |
+| NULL         | DELHI    |
+| NULL         | MUMBAI   |
++--------------+----------+
+5 rows in set (0.06 sec)
+
+mysql> SELECT * FROM EMPLOYEE CROSS JOIN DEPARTMENTS;
++------------+--------------+--------------+--------+--------------+----------------+----------+
+| employeeid | employeename | departmentID | salary | departmentID | DEPARTMENTNAME | LOCATION |
++------------+--------------+--------------+--------+--------------+----------------+----------+
+|        103 | harsh        |            2 |  56388 |            1 | IT             | DELHI    |
+|        102 | priya        |            5 |  56000 |            1 | IT             | DELHI    |
+|        101 | rahul        |            1 |  30000 |            1 | IT             | DELHI    |
+|        103 | harsh        |            2 |  56388 |            2 | HR             | PUNE     |
+|        102 | priya        |            5 |  56000 |            2 | HR             | PUNE     |
+|        101 | rahul        |            1 |  30000 |            2 | HR             | PUNE     |
+|        103 | harsh        |            2 |  56388 |            3 | FIANANCE       | DELHI    |
+|        102 | priya        |            5 |  56000 |            3 | FIANANCE       | DELHI    |
+|        101 | rahul        |            1 |  30000 |            3 | FIANANCE       | DELHI    |
+|        103 | harsh        |            2 |  56388 |            4 | IT             | MUMBAI   |
+|        102 | priya        |            5 |  56000 |            4 | IT             | MUMBAI   |
+|        101 | rahul        |            1 |  30000 |            4 | IT             | MUMBAI   |
++------------+--------------+--------------+--------+--------------+----------------+----------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPARTMENTS LIMIT 4 OFFSET 2;
++--------------+----------------+----------+
+| departmentID | DEPARTMENTNAME | LOCATION |
++--------------+----------------+----------+
+|            3 | FIANANCE       | DELHI    |
+|            4 | IT             | MUMBAI   |
++--------------+----------------+----------+
+2 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DAY 3)
+Enter password: *************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 22
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use bootcamp;
+Database changed
+mysql> select * from employee;
++------------+--------------+--------------+--------+
+| employeeid | employeename | departmentID | salary |
++------------+--------------+--------------+--------+
+|        101 | rahul        |            1 |  30000 |
+|        102 | priya        |            5 |  56000 |
+|        103 | harsh        |            2 |  56388 |
++------------+--------------+--------------+--------+
+3 rows in set (0.13 sec)
+
+mysql> ALTER TABLE employee
+    -> ADD city VARCHAR(30);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee
+    -> ADD experience INT;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> UPDATE employee
+    -> SET city = 'Delhi',
+    ->     experience = 3
+    -> WHERE employeeId = 101;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE employee
+    -> SET city = 'Mumbai',
+    ->     experience = 5
+    -> WHERE employeeId = 102;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE employee
+    -> SET city = 'Pune',
+    ->     experience = 4
+    -> WHERE employeeId = 103;
+Query OK, 1 row affected (0.18 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> INSERT INTO employee
+    -> VALUES
+    -> (104, 'Sneha', 3, 45000, 'Delhi', 4),
+    -> (105, 'Karan', 1, 80000, 'Bangalore', 6),
+    -> (106, 'Anjali', 2, 39000, 'Jaipur', 2),
+    -> (107, 'Rohit', 5, 60000, 'Delhi', 7),
+    -> (108, 'Neha', 4, 48000, 'Mumbai', 4),
+    -> (109, 'Vikas', 1, 92000, 'Hyderabad', 10),
+    -> (110, 'Pooja', 2, 34000, 'Pune', 1);
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++------------+--------------+--------------+--------+-----------+------------+
+| employeeid | employeename | departmentID | salary | city      | experience |
++------------+--------------+--------------+--------+-----------+------------+
+|        101 | rahul        |            1 |  30000 | Delhi     |          3 |
+|        102 | priya        |            5 |  56000 | Mumbai    |          5 |
+|        103 | harsh        |            2 |  56388 | Pune      |          4 |
+|        104 | Sneha        |            3 |  45000 | Delhi     |          4 |
+|        105 | Karan        |            1 |  80000 | Bangalore |          6 |
+|        106 | Anjali       |            2 |  39000 | Jaipur    |          2 |
+|        107 | Rohit        |            5 |  60000 | Delhi     |          7 |
+|        108 | Neha         |            4 |  48000 | Mumbai    |          4 |
+|        109 | Vikas        |            1 |  92000 | Hyderabad |         10 |
+|        110 | Pooja        |            2 |  34000 | Pune      |          1 |
++------------+--------------+--------------+--------+-----------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select count(*) as total_employee from employee;
++----------------+
+| total_employee |
++----------------+
+|             10 |
++----------------+
+1 row in set (0.04 sec)
+
+mysql>  select count(*) as city from employee where city='delhi';
++------+
+| city |
++------+
+|    3 |
++------+
+1 row in set (0.03 sec)
+
+mysql> select sum(salary) as total
+    ->
+    -> select sum(salary) as total from employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select sum(salary) as total from employee' at line 3
+mysql>
+mysql>  select sum(salary) as total from employee;
++--------+
+| total  |
++--------+
+| 540388 |
++--------+
+1 row in set (0.06 sec)
+
+mysql>  select avg(salary) as average_sal from employee;
++-------------+
+| average_sal |
++-------------+
+|  54038.8000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql>  select max(experience) as maximum_exp from employee;
++-------------+
+| maximum_exp |
++-------------+
+|          10 |
++-------------+
+1 row in set (0.26 sec)
+
+mysql>  select city, count(*) as employeecount from employee group by city;
++-----------+---------------+
+| city      | employeecount |
++-----------+---------------+
+| Delhi     |             3 |
+| Mumbai    |             2 |
+| Pune      |             2 |
+| Bangalore |             1 |
+| Jaipur    |             1 |
+| Hyderabad |             1 |
++-----------+---------------+
+6 rows in set (0.21 sec)
+
+mysql> select city, count(*) as employeecount from employee group by city order by employeecount asc;
++-----------+---------------+
+| city      | employeecount |
++-----------+---------------+
+| Bangalore |             1 |
+| Jaipur    |             1 |
+| Hyderabad |             1 |
+| Mumbai    |             2 |
+| Pune      |             2 |
+| Delhi     |             3 |
++-----------+---------------+
+6 rows in set (0.04 sec)
+
+mysql> select city, avg(salary) as average_sal from employee group by city;
++-----------+-------------+
+| city      | average_sal |
++-----------+-------------+
+| Delhi     |  45000.0000 |
+| Mumbai    |  52000.0000 |
+| Pune      |  45194.0000 |
+| Bangalore |  80000.0000 |
+| Jaipur    |  39000.0000 |
+| Hyderabad |  92000.0000 |
++-----------+-------------+
+6 rows in set (0.28 sec)
+
+mysql> select city, avg(salary) as average_sal from employee group by city having avg(salary)>45000;
++-----------+-------------+
+| city      | average_sal |
++-----------+-------------+
+| Mumbai    |  52000.0000 |
+| Pune      |  45194.0000 |
+| Bangalore |  80000.0000 |
+| Hyderabad |  92000.0000 |
++-----------+-------------+
+4 rows in set (0.01 sec)
+
+mysql> select * from employee where salary<( select avg(salary) from employee);
++------------+--------------+--------------+--------+--------+------------+
+| employeeid | employeename | departmentID | salary | city   | experience |
++------------+--------------+--------------+--------+--------+------------+
+|        101 | rahul        |            1 |  30000 | Delhi  |          3 |
+|        104 | Sneha        |            3 |  45000 | Delhi  |          4 |
+|        106 | Anjali       |            2 |  39000 | Jaipur |          2 |
+|        108 | Neha         |            4 |  48000 | Mumbai |          4 |
+|        110 | Pooja        |            2 |  34000 | Pune   |          1 |
++------------+--------------+--------------+--------+--------+------------+
+5 rows in set (0.04 sec)
+
+mysql> select city, sum(salary) as total from employee group by city order by city desc limit 1;
++------+-------+
+| city | total |
++------+-------+
+| Pune | 90388 |
++------+-------+
+1 row in set (0.04 sec)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DAY 4)
+
+mysql> use bootcamp;
+Database changed
+mysql> select * from employee;
++------------+--------------+--------------+--------+-----------+------------+
+| employeeid | employeename | departmentID | salary | city      | experience |
++------------+--------------+--------------+--------+-----------+------------+
+|        101 | rahul        |            1 |  30000 | Delhi     |          3 |
+|        102 | priya        |            5 |  56000 | Mumbai    |          5 |
+|        103 | harsh        |            2 |  56388 | Pune      |          4 |
+|        104 | Sneha        |            3 |  45000 | Delhi     |          4 |
+|        105 | Karan        |            1 |  80000 | Bangalore |          6 |
+|        106 | Anjali       |            2 |  39000 | Jaipur    |          2 |
+|        107 | Rohit        |            5 |  60000 | Delhi     |          7 |
+|        108 | Neha         |            4 |  48000 | Mumbai    |          4 |
+|        109 | Vikas        |            1 |  92000 | Hyderabad |         10 |
+|        110 | Pooja        |            2 |  34000 | Pune      |          1 |
++------------+--------------+--------------+--------+-----------+------------+
+10 rows in set (0.29 sec)
+
+mysql> select employeename, salary, city, row_number() over (order by salary desc) as rank_num from employee;
++--------------+--------+-----------+----------+
+| employeename | salary | city      | rank_num |
++--------------+--------+-----------+----------+
+| Vikas        |  92000 | Hyderabad |        1 |
+| Karan        |  80000 | Bangalore |        2 |
+| Rohit        |  60000 | Delhi     |        3 |
+| harsh        |  56388 | Pune      |        4 |
+| priya        |  56000 | Mumbai    |        5 |
+| Neha         |  48000 | Mumbai    |        6 |
+| Sneha        |  45000 | Delhi     |        7 |
+| Anjali       |  39000 | Jaipur    |        8 |
+| Pooja        |  34000 | Pune      |        9 |
+| rahul        |  30000 | Delhi     |       10 |
++--------------+--------+-----------+----------+
+10 rows in set (0.03 sec)
+
+mysql> select employeename, salary, city, rank() over (partition by city order by salary desc) as rank_num from employee;
++--------------+--------+-----------+----------+
+| employeename | salary | city      | rank_num |
++--------------+--------+-----------+----------+
+| Karan        |  80000 | Bangalore |        1 |
+| Rohit        |  60000 | Delhi     |        1 |
+| Sneha        |  45000 | Delhi     |        2 |
+| rahul        |  30000 | Delhi     |        3 |
+| Vikas        |  92000 | Hyderabad |        1 |
+| Anjali       |  39000 | Jaipur    |        1 |
+| priya        |  56000 | Mumbai    |        1 |
+| Neha         |  48000 | Mumbai    |        2 |
+| harsh        |  56388 | Pune      |        1 |
+| Pooja        |  34000 | Pune      |        2 |
++--------------+--------+-----------+----------+
+10 rows in set (0.04 sec)
+
+mysql> select * from employee where employeename like 'a%';
++------------+--------------+--------------+--------+--------+------------+
+| employeeid | employeename | departmentID | salary | city   | experience |
++------------+--------------+--------------+--------+--------+------------+
+|        106 | Anjali       |            2 |  39000 | Jaipur |          2 |
++------------+--------------+--------------+--------+--------+------------+
+1 row in set (0.04 sec)
+
+mysql> select * from employee where salary between 30000 and 50000;
++------------+--------------+--------------+--------+--------+------------+
+| employeeid | employeename | departmentID | salary | city   | experience |
++------------+--------------+--------------+--------+--------+------------+
+|        101 | rahul        |            1 |  30000 | Delhi  |          3 |
+|        104 | Sneha        |            3 |  45000 | Delhi  |          4 |
+|        106 | Anjali       |            2 |  39000 | Jaipur |          2 |
+|        108 | Neha         |            4 |  48000 | Mumbai |          4 |
+|        110 | Pooja        |            2 |  34000 | Pune   |          1 |
++------------+--------------+--------------+--------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where city not in ('Delhi','Pune');
++------------+--------------+--------------+--------+-----------+------------+
+| employeeid | employeename | departmentID | salary | city      | experience |
++------------+--------------+--------------+--------+-----------+------------+
+|        102 | priya        |            5 |  56000 | Mumbai    |          5 |
+|        105 | Karan        |            1 |  80000 | Bangalore |          6 |
+|        106 | Anjali       |            2 |  39000 | Jaipur    |          2 |
+|        108 | Neha         |            4 |  48000 | Mumbai    |          4 |
+|        109 | Vikas        |            1 |  92000 | Hyderabad |         10 |
++------------+--------------+--------------+--------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select employeename, salary, case when salary>= 60000 then 'High' when salary >=45000 then 'medium' else' low' end as category_label from employee;
++--------------+--------+----------------+
+| employeename | salary | category_label |
++--------------+--------+----------------+
+| rahul        |  30000 |  low           |
+| priya        |  56000 | medium         |
+| harsh        |  56388 | medium         |
+| Sneha        |  45000 | medium         |
+| Karan        |  80000 | High           |
+| Anjali       |  39000 |  low           |
+| Rohit        |  60000 | High           |
+| Neha         |  48000 | medium         |
+| Vikas        |  92000 | High           |
+| Pooja        |  34000 |  low           |
++--------------+--------+----------------+
+10 rows in set (0.01 sec)
+
+mysql> update employee set salary=50000 where employeeid=101;
+Query OK, 1 row affected (0.28 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++------------+--------------+--------------+--------+-----------+------------+
+| employeeid | employeename | departmentID | salary | city      | experience |
++------------+--------------+--------------+--------+-----------+------------+
+|        101 | rahul        |            1 |  50000 | Delhi     |          3 |
+|        102 | priya        |            5 |  56000 | Mumbai    |          5 |
+|        103 | harsh        |            2 |  56388 | Pune      |          4 |
+|        104 | Sneha        |            3 |  45000 | Delhi     |          4 |
+|        105 | Karan        |            1 |  80000 | Bangalore |          6 |
+|        106 | Anjali       |            2 |  39000 | Jaipur    |          2 |
+|        107 | Rohit        |            5 |  60000 | Delhi     |          7 |
+|        108 | Neha         |            4 |  48000 | Mumbai    |          4 |
+|        109 | Vikas        |            1 |  92000 | Hyderabad |         10 |
+|        110 | Pooja        |            2 |  34000 | Pune      |          1 |
++------------+--------------+--------------+--------+-----------+------------+
+10 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DAY 5)
+
+mysql> create database swiggy;
+Query OK, 1 row affected (0.14 sec)
+
+mysql> use swiggy;
+Database changed
+mysql> CREATE TABLE Customers ( CustomerID INT PRIMARY KEY, CustomerName VARCHAR(50), City VARCHAR(30), Membership VARCHAR(20) );
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> INSERT INTO Customers  VALUES (101,'Amit Sharma','Delhi','Gold'), (102,'Priya Verma','Mumbai','Silver'), (103,'Rahul Singh','Delhi','Gold'), (104,'Sneha Gupta','Pune','Regular'), (105,'Karan Mehta','Bangalore','Silver'), (106,'Anjali Jain','Delhi','Gold'), (107,'Rohit Kumar','Hyderabad','Regular'), (108,'Neha Kapoor','Mumbai','Gold'), (109,'Pooja Arora','Pune','Silver'), (110,'Vikas Malhotra','Chennai','Regular'), (111,'Riya Sharma','Jaipur','Gold'), (112,'Aditya Singh','Lucknow','Regular');
+Query OK, 12 rows affected (0.05 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Restaurants ( RestaurantID INT PRIMARY KEY, RestaurantName VARCHAR(50), Cuisine VARCHAR(30), City VARCHAR(30), Rating DECIMAL(2,1) );
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> INSERT INTO Restaurants VALUES (201,'Burger King','Fast Food','Delhi',4.4), (202,'Dominos','Pizza','Mumbai',4.5), (203,'Biryani Blues','Biryani','Delhi',4.7), (204,'Pizza Hut','Pizza','Pune',4.3), (205,'Subway','Healthy','Bangalore',4.2), (206,'KFC','Fast Food','Hyderabad',4.1), (207,'Haldiram''s','North Indian','Delhi',4.6), (208,'Wow Momo','Chinese','Mumbai',4.2), (209,'Barbeque Nation','BBQ','Pune',4.8), (210,'Faasos','Rolls','Chennai',4.0), (211,'McDonalds','Fast Food','Delhi',4.3), (212,'Behrouz Biryani','Biryani','Bangalore',4.7);
+Query OK, 12 rows affected (0.12 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Orders ( OrderID INT PRIMARY KEY, CustomerID INT, RestaurantID INT, OrderAmount INT, DeliveryPartner VARCHAR(30), OrderDate DATE, OrderStatus VARCHAR(20), FOREIGN KEY(CustomerID) REFERENCES Customers(CustomerID), FOREIGN KEY(RestaurantID) REFERENCES Restaurants(RestaurantID) );
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> INSERT INTO Orders VALUES (1001,101,201,450,'Rahul','2026-08-01','Delivered'), (1002,102,202,780,'Aman','2026-08-01','Delivered'), (1003,103,203,620,'Rohit','2026-08-02','Delivered'), (1004,104,204,540,'Rahul','2026-08-02','Cancelled'), (1005,105,205,390,'Aman','2026-08-03','Delivered'), (1006,106,207,860,'Neha','2026-08-03','Delivered'), (1007,107,206,710,'Rohit','2026-08-04','Delivered'), (1008,108,208,580,'Rahul','2026-08-04','Delivered'), (1009,109,209,950,'Aman','2026-08-05','Delivered'), (1010,110,210,430,'Neha','2026-08-05','Delivered'), (1011,101,203,720,'Rahul','2026-08-06','Delivered'), (1012,102,202,810,'Aman','2026-08-06','Delivered'), (1013,103,207,650,'Neha','2026-08-07','Delivered'), (1014,104,204,490,'Rohit','2026-08-07','Delivered'), (1015,105,212,880,'Rahul','2026-08-08','Delivered'), (1016,106,211,520,'Aman','2026-08-08','Cancelled'), (1017,107,206,640,'Neha','2026-08-09','Delivered'), (1018,108,208,760,'Rahul','2026-08-09','Delivered'), (1019,109,209,990,'Rohit','2026-08-10','Delivered'), (1020,110,210,450,'Aman','2026-08-10','Delivered');
+Query OK, 20 rows affected (0.24 sec)
+Records: 20  Duplicates: 0  Warnings: 0
+
+mysql> select * from customers;
++------------+----------------+-----------+------------+
+| CustomerID | CustomerName   | City      | Membership |
++------------+----------------+-----------+------------+
+|        101 | Amit Sharma    | Delhi     | Gold       |
+|        102 | Priya Verma    | Mumbai    | Silver     |
+|        103 | Rahul Singh    | Delhi     | Gold       |
+|        104 | Sneha Gupta    | Pune      | Regular    |
+|        105 | Karan Mehta    | Bangalore | Silver     |
+|        106 | Anjali Jain    | Delhi     | Gold       |
+|        107 | Rohit Kumar    | Hyderabad | Regular    |
+|        108 | Neha Kapoor    | Mumbai    | Gold       |
+|        109 | Pooja Arora    | Pune      | Silver     |
+|        110 | Vikas Malhotra | Chennai   | Regular    |
+|        111 | Riya Sharma    | Jaipur    | Gold       |
+|        112 | Aditya Singh   | Lucknow   | Regular    |
++------------+----------------+-----------+------------+
+12 rows in set (0.06 sec)
+
+mysql> select 8 from restaurants;
++---+
+| 8 |
++---+
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
++---+
+12 rows in set (0.02 sec)
+
+mysql> select * from restaurants;
++--------------+-----------------+--------------+-----------+--------+
+| RestaurantID | RestaurantName  | Cuisine      | City      | Rating |
++--------------+-----------------+--------------+-----------+--------+
+|          201 | Burger King     | Fast Food    | Delhi     |    4.4 |
+|          202 | Dominos         | Pizza        | Mumbai    |    4.5 |
+|          203 | Biryani Blues   | Biryani      | Delhi     |    4.7 |
+|          204 | Pizza Hut       | Pizza        | Pune      |    4.3 |
+|          205 | Subway          | Healthy      | Bangalore |    4.2 |
+|          206 | KFC             | Fast Food    | Hyderabad |    4.1 |
+|          207 | Haldiram's      | North Indian | Delhi     |    4.6 |
+|          208 | Wow Momo        | Chinese      | Mumbai    |    4.2 |
+|          209 | Barbeque Nation | BBQ          | Pune      |    4.8 |
+|          210 | Faasos          | Rolls        | Chennai   |    4.0 |
+|          211 | McDonalds       | Fast Food    | Delhi     |    4.3 |
+|          212 | Behrouz Biryani | Biryani      | Bangalore |    4.7 |
++--------------+-----------------+--------------+-----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select * from orders;
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+| OrderID | CustomerID | RestaurantID | OrderAmount | DeliveryPartner | OrderDate  | OrderStatus |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+|    1001 |        101 |          201 |         450 | Rahul           | 2026-08-01 | Delivered   |
+|    1002 |        102 |          202 |         780 | Aman            | 2026-08-01 | Delivered   |
+|    1003 |        103 |          203 |         620 | Rohit           | 2026-08-02 | Delivered   |
+|    1004 |        104 |          204 |         540 | Rahul           | 2026-08-02 | Cancelled   |
+|    1005 |        105 |          205 |         390 | Aman            | 2026-08-03 | Delivered   |
+|    1006 |        106 |          207 |         860 | Neha            | 2026-08-03 | Delivered   |
+|    1007 |        107 |          206 |         710 | Rohit           | 2026-08-04 | Delivered   |
+|    1008 |        108 |          208 |         580 | Rahul           | 2026-08-04 | Delivered   |
+|    1009 |        109 |          209 |         950 | Aman            | 2026-08-05 | Delivered   |
+|    1010 |        110 |          210 |         430 | Neha            | 2026-08-05 | Delivered   |
+|    1011 |        101 |          203 |         720 | Rahul           | 2026-08-06 | Delivered   |
+|    1012 |        102 |          202 |         810 | Aman            | 2026-08-06 | Delivered   |
+|    1013 |        103 |          207 |         650 | Neha            | 2026-08-07 | Delivered   |
+|    1014 |        104 |          204 |         490 | Rohit           | 2026-08-07 | Delivered   |
+|    1015 |        105 |          212 |         880 | Rahul           | 2026-08-08 | Delivered   |
+|    1016 |        106 |          211 |         520 | Aman            | 2026-08-08 | Cancelled   |
+|    1017 |        107 |          206 |         640 | Neha            | 2026-08-09 | Delivered   |
+|    1018 |        108 |          208 |         760 | Rahul           | 2026-08-09 | Delivered   |
+|    1019 |        109 |          209 |         990 | Rohit           | 2026-08-10 | Delivered   |
+|    1020 |        110 |          210 |         450 | Aman            | 2026-08-10 | Delivered   |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> select count(*) as total_orders from orders;
++--------------+
+| total_orders |
++--------------+
+|           20 |
++--------------+
+1 row in set (0.26 sec)
+
+mysql> select sum(orderamount) as total_revenus from orders;
++---------------+
+| total_revenus |
++---------------+
+|         13220 |
++---------------+
+1 row in set (0.10 sec)
+
+mysql> select avg(orderamount) as average_revenue from orders;
++-----------------+
+| average_revenue |
++-----------------+
+|        661.0000 |
++-----------------+
+1 row in set (0.05 sec)
+
+mysql> select * from orders order by orderamount desc limit 5;
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+| OrderID | CustomerID | RestaurantID | OrderAmount | DeliveryPartner | OrderDate  | OrderStatus |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+|    1019 |        109 |          209 |         990 | Rohit           | 2026-08-10 | Delivered   |
+|    1009 |        109 |          209 |         950 | Aman            | 2026-08-05 | Delivered   |
+|    1015 |        105 |          212 |         880 | Rahul           | 2026-08-08 | Delivered   |
+|    1006 |        106 |          207 |         860 | Neha            | 2026-08-03 | Delivered   |
+|    1012 |        102 |          202 |         810 | Aman            | 2026-08-06 | Delivered   |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+5 rows in set (0.01 sec)
+
+mysql> select c.city sum(o.orderamount)as revenue from customers c join orders o on c.customerid group by c.city order by revenue desc limit 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sum(o.orderamount)as revenue from customers c join orders o on c.customerid grou' at line 1
+mysql>
+mysql>
+mysql> select c.city ,sum(o.orderamount)as revenue from customers c join orders o on c.customerid=o.customerid
+    -> group by c.city
+    -> order by revenue desc
+    -> limit 1;
++-------+---------+
+| city  | revenue |
++-------+---------+
+| Delhi |    3820 |
++-------+---------+
+1 row in set (0.03 sec)
+
+mysql> select deliverypartner , count(*) as deliveries from orders where orderstatus='Delivered' group by deliverpartner order by deliveries desc limit 1;
+ERROR 1054 (42S22): Unknown column 'deliverpartner' in 'group statement'
+mysql> select deliverypartner , count(*) as deliveries from orders where orderstatus='Delivered' group by deliverypartner order by deliveries desc limit 1;
++-----------------+------------+
+| deliverypartner | deliveries |
++-----------------+------------+
+| Rahul           |          5 |
++-----------------+------------+
+1 row in set (0.01 sec)
+
+mysql> select * from orders where orderamount> ( select avg(orderamount) from orders);
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+| OrderID | CustomerID | RestaurantID | OrderAmount | DeliveryPartner | OrderDate  | OrderStatus |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+|    1002 |        102 |          202 |         780 | Aman            | 2026-08-01 | Delivered   |
+|    1006 |        106 |          207 |         860 | Neha            | 2026-08-03 | Delivered   |
+|    1007 |        107 |          206 |         710 | Rohit           | 2026-08-04 | Delivered   |
+|    1009 |        109 |          209 |         950 | Aman            | 2026-08-05 | Delivered   |
+|    1011 |        101 |          203 |         720 | Rahul           | 2026-08-06 | Delivered   |
+|    1012 |        102 |          202 |         810 | Aman            | 2026-08-06 | Delivered   |
+|    1015 |        105 |          212 |         880 | Rahul           | 2026-08-08 | Delivered   |
+|    1018 |        108 |          208 |         760 | Rahul           | 2026-08-09 | Delivered   |
+|    1019 |        109 |          209 |         990 | Rohit           | 2026-08-10 | Delivered   |
++---------+------------+--------------+-------------+-----------------+------------+-------------+
+9 rows in set (0.02 sec)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
